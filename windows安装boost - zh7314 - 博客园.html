@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://www.cnblogs.com/zx-admin/p/11792567.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="origin">
+    <meta property="og:description" content="2019年11月4日16:00:36 Boost.Asio 使用文档 https://mmoaay.gitbooks.io/boost-asio-cpp-network-programming-chi">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>windows安装boost - zh7314 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="https://common.cnblogs.com/favicon.ico?v=20200522" type="image/x-icon">
+    
+    <link rel="stylesheet" href="./windows安装boost - zh7314 - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./windows安装boost - zh7314 - 博客园_files/bundle-simpleclear.min.css">
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./windows安装boost - zh7314 - 博客园_files/bundle-simpleclear-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zx-admin/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zx-admin/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zx-admin/wlwmanifest.xml">
+    <script async="" src="./windows安装boost - zh7314 - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./windows安装boost - zh7314 - 博客园_files/encoder.js.下载"></script><script>
+        var currentBlogId = 178813;
+        var currentBlogApp = 'zx-admin';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleClear';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2019-11-04 04:04';
+        </script>
+    <script src="./windows安装boost - zh7314 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./windows安装boost - zh7314 - 博客园_files/blog-common.min.js.下载"></script>
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="./windows安装boost - zh7314 - 博客园_files/MathJax.js.下载"></script>
+    
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><link rel="preload" href="./windows安装boost - zh7314 - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./windows安装boost - zh7314 - 博客园_files/f.txt"></script><script src="./windows安装boost - zh7314 - 博客园_files/pubads_impl_2020073001.js.下载" async=""></script><link rel="prefetch" href="https://a3cb88edec0b06680c576c8dc13fd7c8.safeframe.googlesyndication.com/safeframe/1-0-37/html/container.html"><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-37/html/container.html"><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div id="MathJax_Message" style="display: none;"></div>
+    <a name="top"></a>
+    
+    <div id="main">
+    <div id="header">
+        
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/zx-admin/">Z.X</a>
+</h1>
+<p id="tagline">
+
+</p>
+
+
+    </div>
+    <div id="post_detail">
+<div class="post">
+    <h2 class="postTitle">
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/zx-admin/p/11792567.html">
+    <span>windows安装boost</span>
+    
+
+
+</a>
+</h2>
+    <div class="postText">
+<div id="cnblogs_post_body" class="blogpost-body">
+    <p>2019年11月4日16:00:36</p>
+<p><strong>Boost.Asio 使用</strong><span style="font-family: 宋体;">文档</span></p>
+<p><a href="https://mmoaay.gitbooks.io/boost-asio-cpp-network-programming-chinese/content/"><span style="text-decoration: underline;">https://mmoaay.gitbooks.io/boost-asio-cpp-network-programming-chinese/content/</span></a></p>
+<p>&nbsp;</p>
+<p>boost windows<span style="font-family: 宋体;">安装</span></p>
+<p>https://www.boost.org/ <span style="font-family: 宋体;">（官网）</span></p>
+<p><span style="font-family: 宋体;">下载</span> boost_1_XX_0.zip<span style="font-family: 宋体;">（我下载了这个版本，</span><span style="font-family: Calibri;">zip</span><span style="font-family: 宋体;">包大概</span><span style="font-family: Calibri;">148M</span><span style="font-family: 宋体;">，解压后</span><span style="font-family: Calibri;">1.</span><span style="font-family: 宋体;">多</span><span style="font-family: Calibri;">G</span><span style="font-family: 宋体;">）</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">打开</span>cmd<span style="font-family: 宋体;">执行脚本，必须</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./windows安装boost - zh7314 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>D:\boost_1_71_0&gt;bootstrap.<span style="color: #000000;">bat
+Building Boost</span>.<span style="color: #000000;">Build engine
+
+Generating Boost</span>.Build configuration in project-config.jam <span style="color: #0000ff;">for</span> msvc...<span style="color: #000000;">
+
+Bootstrapping is </span><span style="color: #0000ff;">done</span>. To build, run:
+
+    .<span style="color: #000000;">\b2
+
+To adjust configuration</span>, edit 'project-config.jam'.<span style="color: #000000;">
+Further information</span>:
+
+    - Command line help:
+    .\b2 --<span style="color: #000000;">help
+
+    </span>- Getting started guide:<span style="color: #000000;">
+    http</span>:<span style="color: #008000;">//</span><span style="color: #008000;">boost.org/more/getting_started/windows.html</span>
+
+    - Boost.Build documentation:<span style="color: #000000;">
+    http</span>:<span style="color: #008000;">//</span><span style="color: #008000;">www.boost.org/build/</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./windows安装boost - zh7314 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">运行</span> .\b2 &nbsp;<span style="font-family: 宋体;">会编译会多东西很久</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">官方</span>windows<span style="font-family: 宋体;">下的使用文档</span></p>
+<p><span style="text-decoration: underline;"><a href="http://boost.org/more/getting_started/windows.html">http://boost.org/more/getting_started/windows.html</a></span></p>
+<p><span style="font-family: 宋体;">编译说明文档</span></p>
+<p><span style="text-decoration: underline;"><a href="https://boostorg.github.io/build/manual/master/index.html">https://boostorg.github.io/build/manual/master/index.html</a></span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./windows安装boost - zh7314 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>D:\boost_1_71_0&gt;b2.exe --<span style="color: #000000;">help
+Boost</span>.Build 4.0-<span style="color: #000000;">git
+
+Project</span>-specific help:<span style="color: #000000;">
+
+  Project has jamfile at Jamroot
+
+Usage</span>:<span style="color: #000000;">
+
+  b2 [options] [properties] [install</span>|<span style="color: #000000;">stage]
+
+  Builds and installs Boost</span>.<span style="color: #000000;">
+
+Targets and Related Options</span>:<span style="color: #000000;">
+
+  install                 Install headers and compiled library files to the
+  </span>=======                 configured locations (below).
+
+  --prefix=&lt;PREFIX&gt;       Install architecture independent files here.
+                          <span style="color: #0000ff;">Default</span>: C:<span style="color: #000000;">\Boost on Windows
+                          </span><span style="color: #0000ff;">Default</span>: /usr/local on Unix, Linux, etc.
+
+  --<span style="color: #008080;">exec</span>-prefix=&lt;EPREFIX&gt; Install architecture dependent files here.
+                          <span style="color: #0000ff;">Default</span>: &lt;PREFIX&gt;
+
+  --libdir=&lt;LIBDIR&gt;       Install library files here.
+                          <span style="color: #0000ff;">Default</span>: &lt;EPREFIX&gt;/<span style="color: #000000;">lib
+
+  </span>--includedir=&lt;HDRDIR&gt;   Install <span style="color: #008080;">header</span> files here.
+                          <span style="color: #0000ff;">Default</span>: &lt;PREFIX&gt;/<span style="color: #0000ff;">include</span>
+
+  --cmakedir=&lt;CMAKEDIR&gt;   Install CMake configuration files here.
+                          <span style="color: #0000ff;">Default</span>: &lt;LIBDIR&gt;/<span style="color: #000000;">cmake
+
+  </span>--no-cmake-config       <span style="color: #0000ff;">Do</span> not install CMake configuration files.<span style="color: #000000;">
+
+  stage                   Build and install only compiled library files to the
+  </span>=====                   stage directory.
+
+  --stagedir=&lt;STAGEDIR&gt;<span style="color: #000000;">   Install library files here
+                          </span><span style="color: #0000ff;">Default</span>: ./<span style="color: #000000;">stage
+
+Other Options</span>:
+
+  --build-type=&lt;type&gt;     Build the specified pre-<span style="color: #008080;">defined</span><span style="color: #000000;"> set of variations of
+                          the libraries</span>. Note,<span style="color: #000000;"> that which variants get built
+                          depends on what </span><span style="color: #008080;">each</span> library supports.
+
+                              -- minimal -- (<span style="color: #0000ff;">default</span><span style="color: #000000;">) Builds a minimal set of
+                              variants</span>. On Windows, these are <span style="color: #0000ff;">static</span><span style="color: #000000;">
+                              multithreaded libraries in debug and release
+                              modes</span>, using shared runtime. On Linux,<span style="color: #000000;"> these are
+                              </span><span style="color: #0000ff;">static</span><span style="color: #000000;"> and shared multithreaded libraries in
+                              release mode</span>.
+
+                              -- complete -- Build all possible variations.
+
+  --build-<span style="color: #008080;">dir</span>=<span style="color: #008080;">DIR</span><span style="color: #000000;">         Build in this location instead of building within
+                          the distribution tree</span>. Recommended!
+
+  --show-libraries        Display the <span style="color: #0000ff;">list</span> of Boost libraries that <span style="color: #0000ff;">require</span><span style="color: #000000;">
+                          build and installation steps</span>, and then <span style="color: #0000ff;">exit</span>.
+
+  --layout=&lt;layout&gt;       Determine whether to choose library names and <span style="color: #008080;">header</span><span style="color: #000000;">
+                          locations such that multiple versions of Boost or
+                          multiple compilers can be used on the same </span><span style="color: #008080;">system</span>.
+
+                              -- versioned -- Names of boost binaries <span style="color: #0000ff;">include</span><span style="color: #000000;">
+                              the Boost version </span><span style="color: #0000ff;">number</span>,<span style="color: #000000;"> name and version of
+                              the compiler and encoded build properties</span>.<span style="color: #000000;"> Boost
+                              headers are installed in a subdirectory of
+                              </span>&lt;HDRDIR&gt;<span style="color: #000000;"> whose name contains the Boost version
+                              </span><span style="color: #0000ff;">number</span>.
+
+                              -- tagged -- Names of boost binaries <span style="color: #0000ff;">include</span><span style="color: #000000;"> the
+                              encoded build properties such </span><span style="color: #0000ff;">as</span><span style="color: #000000;"> variant and
+                              threading</span>, but <span style="color: #0000ff;">do</span><span style="color: #000000;"> not including compiler name
+                              and version</span>, or Boost version.<span style="color: #000000;"> This option is
+                              useful </span><span style="color: #0000ff;">if</span> you build several variants of Boost,<span style="color: #000000;">
+                              using the same compiler</span>.
+
+                              -- <span style="color: #008080;">system</span> -- Binaries names <span style="color: #0000ff;">do</span> not <span style="color: #0000ff;">include</span><span style="color: #000000;"> the
+                              Boost version </span><span style="color: #0000ff;">number</span><span style="color: #000000;"> or the name and version
+                              </span><span style="color: #0000ff;">number</span> of the compiler.<span style="color: #000000;"> Boost headers are
+                              installed directly into </span>&lt;HDRDIR&gt;.<span style="color: #000000;"> This option is
+                              intended </span><span style="color: #0000ff;">for</span> <span style="color: #008080;">system</span><span style="color: #000000;"> integrators building
+                              distribution packages</span>.<span style="color: #000000;">
+
+                          The </span><span style="color: #0000ff;">default</span> value is 'versioned' on Windows,<span style="color: #000000;"> and
+                          </span>'system' on Unix.
+
+  --buildid=ID            Add the specified ID to the name of built libraries.<span style="color: #000000;">
+                          The </span><span style="color: #0000ff;">default</span> is to not add anything.
+
+  --python-buildid=<span style="color: #000000;">ID     Add the specified ID to the name of built libraries
+                          that depend on Python</span>. The <span style="color: #0000ff;">default</span><span style="color: #000000;"> is to not add
+                          anything</span>. This ID is added in addition to --buildid.
+
+  --help                  This message.
+
+  --with-&lt;library&gt;        Build and install the specified &lt;library&gt;. <span style="color: #0000ff;">If</span><span style="color: #000000;"> this
+                          option is used</span>,<span style="color: #000000;"> only libraries specified using this
+                          option will be built</span>.
+
+  --without-&lt;library&gt;     <span style="color: #0000ff;">Do</span> not build, stage,<span style="color: #000000;"> or install the specified
+                          </span>&lt;library&gt;. By <span style="color: #0000ff;">default</span>, all libraries are built.<span style="color: #000000;">
+
+Properties</span>:<span style="color: #000000;">
+
+  toolset</span>=toolset         Indicate the toolset to build with.<span style="color: #000000;">
+
+  variant</span>=debug|<span style="color: #000000;">release   Select the build variant
+
+  link</span>=<span style="color: #0000ff;">static</span>|shared      Whether to build <span style="color: #0000ff;">static</span><span style="color: #000000;"> or shared libraries
+
+  threading</span>=single|<span style="color: #000000;">multi  Whether to build single or multithreaded binaries
+
+  runtime</span>-link=<span style="color: #0000ff;">static</span>|<span style="color: #000000;">shared
+                          Whether to link to </span><span style="color: #0000ff;">static</span> or shared C and C++<span style="color: #000000;">
+                          runtime</span>.<span style="color: #000000;">
+
+
+General command line usage</span>:<span style="color: #000000;">
+
+    b2 [options] [properties] [targets]
+
+  Options</span>, properties and targets can be specified in any order.<span style="color: #000000;">
+
+Important Options</span>:
+
+  * --<span style="color: #000000;">clean Remove targets instead of building
+  </span>* -<span style="color: #000000;">a Rebuild everything
+  </span>* -n Don'<span style="color: #000000;">t execute the commands, only print them
+  * -d+2 Show commands as they are executed
+  * -d0 Suppress all informational messages
+  * -q Stop at first error
+  * --reconfigure Rerun all configuration checks
+  * --debug-configuration Diagnose configuration
+  * --debug-building Report which targets are built with what properties
+  * --debug-generator Diagnose generator search/execution
+
+Further Help:
+
+  The following options can be used to obtain additional documentation.
+
+  * --help-options Print more obscure command line options.
+  * --help-internal Boost.Build implementation details.
+  * --help-doc-options Implementation details doc formatting.
+
+...found 1 target...</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./windows安装boost - zh7314 - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>1.cmd<span style="font-family: 宋体;">进入</span><span style="font-family: Calibri;">boost</span><span style="font-family: 宋体;">源码包，运行</span><span style="font-family: Calibri;">bootstrap.bat</span><span style="font-family: 宋体;">生成</span><span style="font-family: Calibri;">b2.exe</span></p>
+<p>2.<span style="font-family: 宋体;">运行</span><span style="font-family: Calibri;">b2.exe</span><span style="font-family: 宋体;">搞定</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family: 宋体;">在</span>visual studio<span style="font-family: 宋体;">配置</span></p>
+<p>1. <span style="font-family: 宋体;">项目属性</span><span style="font-family: Calibri;">&gt;&gt; C/C++ &gt;&gt; </span><span style="font-family: 宋体;">常规 </span><span style="font-family: Calibri;">&gt;&gt; </span><span style="font-family: 宋体;">附加包含目录</span></p>
+<p>D:\boost_1_71_0&gt;\boost_1_70_0<span style="font-family: 宋体;">一定不要加上</span><span style="font-family: Calibri;">boost</span></p>
+<p>2.<span style="font-family: 宋体;">链接器，附加库目录</span></p>
+<p>D:\boost_1_71_0&gt;\boost_1_70_0\libs</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature" style="display: block;">QQ群 <span style="color: red">247823727</span> 博客文件如果不能下载请进群下载 <br>
+如果公司项目有技术瓶颈问题，如有需要，请联系我，提供技术服务
+<span style="color: red">QQ: 903464207</span>
+<br></div>
+<div class="clear"></div>
+<div id="blog_post_info_block"><div id="BlogPostCategory">
+    分类: 
+            <a href="https://www.cnblogs.com/zx-admin/category/941736.html" target="_blank">c/c++相关</a></div>
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(11792567,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;821b0b3e-9472-e111-aa3f-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./windows安装boost - zh7314 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./windows安装boost - zh7314 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/zx-admin/" target="_blank"><img src="./windows安装boost - zh7314 - 博客园_files/20180209112218.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/zx-admin/">zh7314</a><br>
+            <a href="https://home.cnblogs.com/u/zx-admin/followees/">关注 - 5</a><br>
+            <a href="https://home.cnblogs.com/u/zx-admin/followers/">粉丝 - 35</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;821b0b3e-9472-e111-aa3f-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(11792567,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(11792567,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/zx-admin/p/11653867.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/zx-admin/p/11653867.html" title="发布于 2019-10-11 14:10">phpspreadsheet 中文文档（八）读写文件+读取文件</a>
+    <br>
+    <a href="https://www.cnblogs.com/zx-admin/p/12014942.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/zx-admin/p/12014942.html" title="发布于 2019-12-10 10:02">RabbitMQ中文文档PHP版本(三)--工作队列</a>
+
+</div>
+</div></div>
+    <p class="postfoot">posted on 
+<span id="post-date">2019-11-04 16:04</span>&nbsp;
+<a href="https://www.cnblogs.com/zx-admin/">zh7314</a>&nbsp;
+阅读(<span id="post_view_count">1152</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11792567" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11792567);return false;">收藏</a></p>
+</div>
+
+
+<script src="./windows安装boost - zh7314 - 博客园_files/highlight.min.js.下载"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 178813, cb_blogApp = 'zx-admin', cb_blogUserGuid = '821b0b3e-9472-e111-aa3f-842b2b196315';
+    var cb_entryId = 11792567, cb_entryCreatedDate = '2019-11-04 16:04', cb_postType = 1; 
+    loadViewCount(cb_entryId);
+    loadSideColumnAd();
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/zx-admin/p/11792567.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/zx-admin/p/11792567.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    注册用户登录后才能发表评论，请 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a>
+     或 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，
+    <a href="https://www.cnblogs.com/">访问</a> 网站首页。
+</div></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】超50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://brands.cnblogs.com/huawei" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-华为专区&#39;)">【推荐】了不起的开发者，挡不住的华为，园子里的品牌专区</a><br><a href="https://developer.aliyun.com/article/769509?utm_content=g_1000163114" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云&#39;)">【推荐】《Java开发手册》测试题大闯关，看看你能走到哪一步</a><br><a href="https://developer.aliyun.com/ask/272857?utm_content=g_1000104135" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】Java实战200例（附源码）-助你提升实战能力</a><br></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1592365906576-0" style="width: 300px; height: 250px;" data-google-query-id="COCH46yshusCFQTdvAod4wABDA"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true" src="./windows安装boost - zh7314 - 博客园_files/saved_resource.html"></iframe></div></div>
+    </div>
+    <div id="under_post_news"><div class="recomm-block"><b>相关博文：</b><br>·  <a title="编译boost (windows msvc14)" href="https://www.cnblogs.com/scotth/p/6113940.html" target="_blank" onclick="clickRecomItmem(6113940)">编译boost (windows msvc14)</a><br>·  <a title="实战Windows下安装boost" href="https://www.cnblogs.com/edgarli/archive/2012/10/29/windows_boost_compile.html" target="_blank" onclick="clickRecomItmem(2745358)">实战Windows下安装boost</a><br>·  <a title="linux, windows编译安装 boost库 (boost 1.56)" href="https://www.cnblogs.com/coolulu/p/4125428.html" target="_blank" onclick="clickRecomItmem(4125428)">linux, windows编译安装 boost库 (boost 1.56)</a><br>·  <a title="Boost-Visual studio 2015环境配置" href="https://www.cnblogs.com/sqxy110/p/4881078.html" target="_blank" onclick="clickRecomItmem(4881078)">Boost-Visual studio 2015环境配置</a><br>·  <a title="boost基础环境搭建" href="https://www.cnblogs.com/drfxiaoliuzi/p/9566507.html" target="_blank" onclick="clickRecomItmem(9566507)">boost基础环境搭建</a><br>»  <a target="_blank" href="https://recomm.cnblogs.com/blogpost/11792567">更多推荐...</a></div></div>
+    <div id="cnblogs_c2" class="c_ad_block" style="display: none;">
+        <div id="div-gpt-ad-1592366332455-0" style="width: 468px; height: 60px;" data-google-query-id="CIr74ayshusCFQTdvAod4wABDA"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none; width: 468px; height: 60px;"></div></div>
+    </div>
+    <div id="under_post_kb">
+<div class="itnews c_ad_block">
+    <b>最新 IT 新闻</b>:
+    <br>
+ ·              <a href="https://news.cnblogs.com/n/668842/" target="_blank">华为轮值董事长郭平：为什么要以项目为中心？</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/668841/" target="_blank">我们被困印度，每天只有半小时有水 半年没吃过猪肉了</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/668840/" target="_blank">最后21天的谈判，Tiktok到底能卖多少钱？</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/668839/" target="_blank">滴滴小桔车服试点新车租售服务，可先租后买</a>
+            <br>
+ ·              <a href="https://news.cnblogs.com/n/668838/" target="_blank">风暴中的字节跳动</a>
+            <br>
+    » <a href="https://www.cnblogs.com/news/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverT2();
+        deliverC1C2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div></div>
+
+
+</div>
+<div id="rightmenu">
+    
+<div id="my_links">
+<h3>导航</h3>
+<ul>
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zx-admin/">
+首页</a>
+</li>
+
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/zh7314">
+联系</a></li>
+<li>
+</li><!--<partial name="./Shared/_XmlLink.cshtml" model="Model" />-->
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+</div>
+
+
+    <div id="calendar">
+        <div id="blog-calendar" style="display: none"></div>
+    </div>
+    <script>loadBlogDefaultCalendar();</script>
+    
+<div id="sidebar_news" class="newsItem"><h3>公告</h3>
+<div class="newsItem">
+	
+<div id="blog-news">
+    
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/zx-admin/">
+            zh7314
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/zx-admin/" title="入园时间：2012-03-20">
+            8年4个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/zx-admin/followers/">
+            35
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/zx-admin/followees/">
+            5
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;821b0b3e-9472-e111-aa3f-842b2b196315&#39;)">+加关注</a></div>
+        <script>getFollowStatus('821b0b3e-9472-e111-aa3f-842b2b196315');</script>
+    </div>
+</div>
+</div>
+
+</div>
+
+<div id="sidebar_ad"></div>
+    <div id="blog_stats">
+<h3>统计</h3>
+<ul>
+<li>随笔 - 
+277</li>
+<li>文章 - 
+0</li>
+<li>评论 - 
+8
+<!--<li>引用 - <partial name="./Shared/_PingTrackCount.cshtml" model="BlogServer.Web.Models.DetailBlogPage" />-->
+</li>
+</ul>
+</div>
+
+
+    <div id="blog-sidecolumn">
+<!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+
+
+<!-- 最新随笔 -->
+<div id="sidebar_recentposts" class="sidebar-block">
+    
+<h3 class="catListTitle">最新随笔</h3>
+<div class="RecentComment" id="RecentPosts">
+    <ul style="word-break:break-all">
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13437860.html">1.cinatra中文开发文档</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13409441.html">2.mysql8 编译安装 cmake参数</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13344106.html">3.php多版本共存，简单方案</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13098980.html">4.apisix高性能网关-中文开发文档</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13098316.html">5.PHP for循环多参数，多条件</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13098049.html">6.c++ 采坑</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13097800.html">7.markdown语法中文文档</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13091320.html">8.cinatra简易入门教程</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/13029750.html">9.nginx-php类似nginx-lua的扩展，nginx-php中文开发文档</a>
+
+                </li>
+                <li>
+                    
+
+<a href="https://www.cnblogs.com/zx-admin/p/12981988.html">10.js css性能优化指南</a>
+
+                </li>
+    </ul>
+</div>
+</div>
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block">
+    
+</div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+    
+		<h3>
+
+随笔分类
+<span style="font-size:11px;font-weight:normal">(44)</span>
+
+</h3>
+				<ul>
+			
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/category/941736.html" rel="" target="">
+    c/c++相关(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/category/1307041.html" rel="" target="">
+    java相关(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/category/1262507.html" rel="" target="">
+    linux相关(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/category/1262505.html" rel="" target="">
+    mysql相关(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/category/560737.html" rel="" target="">
+    php相关(33)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/category/1262508.html" rel="" target="">
+    算法相关(4)
+</a>
+ 
+</li>
+			
+				</ul>
+		<h3>
+
+随笔档案
+<span style="font-size:11px;font-weight:normal">(277)</span>
+
+</h3>
+				<ul>
+			
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/08.html" rel="" target="">
+    2020年8月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/07.html" rel="" target="">
+    2020年7月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/06.html" rel="" target="">
+    2020年6月(6)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/05.html" rel="" target="">
+    2020年5月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/04.html" rel="" target="">
+    2020年4月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/03.html" rel="" target="">
+    2020年3月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/02.html" rel="" target="">
+    2020年2月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2020/01.html" rel="" target="">
+    2020年1月(8)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/12.html" rel="" target="">
+    2019年12月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/11.html" rel="" target="">
+    2019年11月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/10.html" rel="" target="">
+    2019年10月(9)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/09.html" rel="" target="">
+    2019年9月(4)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/08.html" rel="" target="">
+    2019年8月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/07.html" rel="" target="">
+    2019年7月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/06.html" rel="" target="">
+    2019年6月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/05.html" rel="" target="">
+    2019年5月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/04.html" rel="" target="">
+    2019年4月(4)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/03.html" rel="" target="">
+    2019年3月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/02.html" rel="" target="">
+    2019年2月(8)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2019/01.html" rel="" target="">
+    2019年1月(7)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/12.html" rel="" target="">
+    2018年12月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/10.html" rel="" target="">
+    2018年10月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/09.html" rel="" target="">
+    2018年9月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/08.html" rel="" target="">
+    2018年8月(7)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/07.html" rel="" target="">
+    2018年7月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/06.html" rel="" target="">
+    2018年6月(5)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/05.html" rel="" target="">
+    2018年5月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/04.html" rel="" target="">
+    2018年4月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/03.html" rel="" target="">
+    2018年3月(4)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2018/01.html" rel="" target="">
+    2018年1月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/12.html" rel="" target="">
+    2017年12月(6)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/11.html" rel="" target="">
+    2017年11月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/10.html" rel="" target="">
+    2017年10月(7)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/07.html" rel="" target="">
+    2017年7月(2)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/06.html" rel="" target="">
+    2017年6月(4)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/05.html" rel="" target="">
+    2017年5月(5)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/04.html" rel="" target="">
+    2017年4月(1)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/03.html" rel="" target="">
+    2017年3月(3)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/02.html" rel="" target="">
+    2017年2月(5)
+</a>
+ 
+</li>
+				<li>
+<a href="https://www.cnblogs.com/zx-admin/archive/2017/01.html" rel="" target="">
+    2017年1月(3)
+</a>
+ 
+</li>
+			
+				</ul>
+
+
+</div>
+
+<!-- 最新评论 -->
+<div id="sidebar_recentcomments" class="sidebar-block">
+    <div id="recent_comments_wrap" class="RecentComment">
+    <h3 class="catListTitle">最新评论</h3>
+    <div class="RecentCommentBlock">
+        <ul>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/5864170.html">1. Re:关于 58 996 浪潮 奋进者计划 华为  奋斗者协议—— 小论！</a></li>
+                    <li class="recent_comment_body"><p>老哥，现在正常996， 紧急情况007</p>
+</li>
+                    <li class="recent_comment_author">--雷骐</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/6828350.html">2. Re:jsignature 中文开发手册</a></li>
+                    <li class="recent_comment_body">感谢博主分享</li>
+                    <li class="recent_comment_author">--君子兰1</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/6828350.html">3. Re:jsignature 中文开发手册</a></li>
+                    <li class="recent_comment_body">博主 demo还在吗？</li>
+                    <li class="recent_comment_author">--plan1990</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/6828350.html">4. Re:jsignature 中文开发手册</a></li>
+                    <li class="recent_comment_body">博主 这个demo还在吗？</li>
+                    <li class="recent_comment_author">--plan1990</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/6828350.html">5. Re:jsignature 中文开发手册</a></li>
+                    <li class="recent_comment_body">感谢博主整理！</li>
+                    <li class="recent_comment_author">--柏格云</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/5437787.html">6. Re:mysql求最大第二，最大第三个数</a></li>
+                    <li class="recent_comment_body">这样是不是有问题，万一有的人的在这个部门是第一，这个分数在别的部门是第二，但这个分数在选第二大的时候是 not in 吧</li>
+                    <li class="recent_comment_author">--YLD10</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/7872046.html">7. Re:bootstrap-treeview 中文开发手册</a></li>
+                    <li class="recent_comment_body">非常 不错，属性 很详细~~~</li>
+                    <li class="recent_comment_author">--天地_2017</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/zx-admin/p/6009558.html">8. Re:sweetalert api中文开发文档和手册</a></li>
+                    <li class="recent_comment_body">sweetalert详细api教程加六种DEMO演示：<a href="https://www.cnblogs.com/zx-admin/p/11792567.html" target="_blank"></a></li>
+                    <li class="recent_comment_author">--阿逗仔</li>
+        </ul>
+    </div>
+</div>
+</div>
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block">
+    
+<div id="topview_posts_wrap">
+    <h3 class="catListTitle">阅读排行榜</h3>
+    <div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/5697447.html">
+                            1. PHP写在线视频直播技术详解(33935)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/6009558.html">
+                            2. sweetalert api中文开发文档和手册(18481)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/7872046.html">
+                            3. bootstrap-treeview 中文开发手册(17699)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/7030978.html">
+                            4. particles.js中文开发手册(16818)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/8352003.html">
+                            5. mpdf中文开发使用文档附demo实例(15821)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/6801978.html">
+                            6. tcpdf开发文档（中文翻译版）(15272)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/4444426.html">
+                            7. php实现单个用户禁止重复登录，防止同一用户同时登陆(13538)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/5783523.html">
+                            8. 视频直播点播nginx-rtmp开发手册中文版(12288)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/6252708.html">
+                            9. php实现简单消息发送+极光推送系统(11491)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/11653863.html">
+                            10. phpspreadsheet 中文文档（七）技巧和诀窍(9858)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block">
+    
+<div id="topfeedback_posts_wrap">
+    <h3 class="catListTitle">评论排行榜</h3>
+    <div id="TopFeedbackPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/6828350.html">
+                            1. jsignature 中文开发手册(4)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/6009558.html">
+                            2. sweetalert api中文开发文档和手册(1)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/5864170.html">
+                            3. 关于 58 996 浪潮 奋进者计划 华为  奋斗者协议—— 小论！(1)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/5437787.html">
+                            4. mysql求最大第二，最大第三个数(1)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/zx-admin/p/7872046.html">
+                            5. bootstrap-treeview 中文开发手册(1)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+    
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/zx-admin/p/7872046.html">
+                                1. bootstrap-treeview 中文开发手册(2)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zx-admin/p/6828350.html">
+                                2. jsignature 中文开发手册(2)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zx-admin/p/6418942.html">
+                                3. js模拟浏览器加载效果 pace.js 中文官方文档(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zx-admin/p/7662387.html">
+                                4. 电商搜索设计原理(基础版)(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/zx-admin/p/3690987.html">
+                                5. discuz全局数组变量 后台各项设置 完整版(1)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div></div>
+    <script>loadBlogSideColumn();</script>
+    <div id="footer">
+	Powered by: 
+	<br>
+	
+	<a href="https://www.cnblogs.com/" id="footer_site_link">博客园</a>
+	<br>
+	Copyright © 2020 zh7314
+<br><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+</div>
+
+
+</div>
+    
+
+
+</body></html>
